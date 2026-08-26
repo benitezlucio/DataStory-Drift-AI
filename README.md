@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/31485453/README.md)
 # DataStory & Drift AI Engine
 
 **Curso:** Generación de Prompts  
