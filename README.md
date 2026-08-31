@@ -243,3 +243,123 @@ Se considera exitosa cuando:
 La Preentrega 2 transforma la idea conceptual de DataStory & Drift AI en una POC reproducible. La principal mejora no consiste solamente en escribir un prompt “más detallado”, sino en diseñar un flujo donde Python controla lo determinístico y el LLM se utiliza únicamente para lo que aporta valor: síntesis, traducción y comunicación.
 
 Este enfoque permite mejorar claridad, trazabilidad, seguridad y costo respecto de la propuesta inicial, manteniendo el objetivo original de conectar métricas de Machine Learning con decisiones de negocio.
+
+
+## Resultados
+
+La implementación permitió comprobar que la estructura del prompt tiene un
+impacto directo sobre la calidad, fidelidad y utilidad de la respuesta generada.
+
+Para evaluar esta diferencia se compararon dos configuraciones:
+
+- **Prompt A — Baseline:** instrucción breve, con contexto técnico pero pocas
+  restricciones.
+- **Prompt B — Fast Prompting optimizado:** incluye grounding explícito,
+  delimitación del contexto, few-shot prompting, descomposición de tareas,
+  formato de salida definido, restricciones contra alucinaciones y
+  auto-validación.
+
+### Resultados del módulo texto-texto
+
+El Prompt A generó una respuesta clara, visualmente atractiva y orientada a
+negocio. Sin embargo, incorporó múltiples afirmaciones que no estaban
+presentes en los datos originales.
+
+Entre los principales problemas detectados se encontraron:
+
+- incorporación de una fecha no proporcionada;
+- afirmaciones sobre el período de entrenamiento del modelo;
+- explicación de cambios mediante causas geopolíticas no incluidas en los
+  datos;
+- asignación de una probabilidad de pérdida del 30–40 % sin evidencia;
+- cálculo de pérdidas mensuales y anuales no proporcionadas;
+- estimación de ROI y payback basada en supuestos generados por el modelo;
+- desglose ficticio de costos de recursos;
+- interpretaciones excesivas de las variables SHAP.
+
+Esto demuestra que una respuesta puede resultar convincente desde el punto de
+vista narrativo y, al mismo tiempo, contener información no respaldada por los
+datos de entrada.
+
+El Prompt B redujo significativamente estos problemas. La salida se limitó a
+las métricas autorizadas, separó hechos medidos de estimaciones y
+limitaciones, y mantuvo explícitamente la necesidad de revisión humana.
+
+La validación automática de la salida optimizada produjo el siguiente
+resultado:
+
+`{'status': 'APTO', 'issues': []}`
+
+La revisión humana posterior detectó únicamente pequeñas imprecisiones
+semánticas, como el uso de “ingresos” donde era más preciso hablar de
+“margen”, y una recomendación de “incorporar” variables que debería
+expresarse como reevaluación de su comportamiento.
+
+Este resultado confirma que los controles automáticos mejoran
+significativamente la confiabilidad de la respuesta, pero no eliminan la
+necesidad de supervisión humana.
+
+### Evaluación comparativa
+
+| Criterio | Prompt A | Prompt B |
+|---|---:|---:|
+| Claridad ejecutiva | 4/5 | 5/5 |
+| Fidelidad a los datos | 1/5 | 4/5 |
+| Ausencia de causalidad indebida | 1/5 | 5/5 |
+| Accionabilidad | 3/5 | 4/5 |
+| Concisión | 2/5 | 5/5 |
+| Cumplimiento de formato | 4/5 | 5/5 |
+| **Promedio** | **2.50/5** | **4.67/5** |
+
+El Prompt B obtuvo una mejora considerable respecto del baseline,
+especialmente en fidelidad a los datos, control de causalidad y concisión.
+
+Aunque el prompt optimizado utiliza más tokens de entrada debido a sus
+restricciones y estructura, reduce la necesidad de realizar consultas
+correctivas posteriores. Por lo tanto, la optimización no se evalúa
+únicamente por la longitud del prompt, sino por la cantidad total de
+interacciones necesarias para obtener una respuesta válida.
+
+### Resultados del módulo texto-imagen
+
+El componente visual también logró representar los conceptos principales de
+la POC.
+
+La imagen de **Model Drift** consiguió comunicar visualmente un cambio entre
+un comportamiento inicialmente estable y una distribución posterior
+diferenciada. La representación evitó el uso de métricas, valores, ejes o
+gráficos cuantitativos ficticios, por lo que funciona correctamente como
+recurso conceptual para una audiencia ejecutiva.
+
+La imagen de **Explainable AI (XAI)** representó correctamente el flujo entre
+las señales del modelo, una capa intermedia de explicación y una persona
+responsable de interpretar el resultado. Esta estructura visual refuerza el
+principio de supervisión humana utilizado en toda la POC.
+
+Sin embargo, en la imagen de XAI aparecieron algunos textos generados con
+errores tipográficos. Este comportamiento constituye una limitación propia de
+la generación de imágenes y demuestra que incluso un prompt con restricciones
+claras no garantiza un cumplimiento perfecto de todas las instrucciones.
+
+### ¿La POC logra resolver el problema planteado?
+
+La POC logra resolver **parcialmente y de manera satisfactoria** el problema
+planteado.
+
+La solución consigue transformar métricas técnicas de Model Drift y XAI en
+una narrativa mucho más accesible para perfiles ejecutivos, manteniendo
+controles que reducen significativamente la generación de información no
+respaldada por los datos.
+
+También demuestra que es posible generar recursos visuales conceptuales para
+acompañar esa narrativa sin necesidad de desarrollar una infraestructura
+compleja ni utilizar una API de generación de imágenes de pago.
+
+Sin embargo, la solución no debe interpretarse como un sistema autónomo para
+la toma de decisiones. Tanto las respuestas de texto como las imágenes
+requieren validación humana antes de ser utilizadas en un entorno real.
+
+Por lo tanto, el resultado más adecuado de la POC no es reemplazar al Data
+Scientist, sino funcionar como un **asistente de traducción y comunicación**
+que acelera la transformación de información técnica en material ejecutivo
+más claro, estructurado y comprensible.
