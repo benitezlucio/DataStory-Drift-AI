@@ -5,6 +5,13 @@
 **Comisión:** 96090  
 **Entrega:** Preentrega 2 — Fast Prompting en Acción
 
+
+## Resumen
+
+DataStory & Drift AI Engine es una Proof of Concept orientada a reducir la brecha de comunicación entre equipos de Data Science y perfiles ejecutivos cuando un modelo de Machine Learning presenta señales de degradación. La solución transforma métricas técnicas de Model Drift y explicabilidad, como PSI y cambios en variables relevantes según SHAP, en una narrativa ejecutiva comprensible, estructurada y orientada a la toma de decisiones.
+
+La POC combina validaciones determinísticas desarrolladas en Python con técnicas de Fast Prompting aplicadas a un modelo texto-texto. Además, genera prompts específicos para un modelo texto-imagen, utilizados posteriormente en una herramienta gratuita para producir recursos visuales conceptuales. El enfoque busca reducir alucinaciones, evitar interpretaciones causales incorrectas y minimizar el número de consultas necesarias.
+
 ## 1. Introducción
 
 ### Nombre del proyecto
